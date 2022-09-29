@@ -6,12 +6,15 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import ProductDetail from './pages/ProductDetail';
 import Purchases from './pages/Purchases';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const isLoading = useSelector(state => state.isLoading);
+
   return (
     <HashRouter>
       <MyNavbar />
-      <LoadingScreen />
+      {isLoading && <LoadingScreen />}
       <Container fluid>
         <Routes>
           <Route path='/' element={<Home />} />
