@@ -9,7 +9,7 @@ const MyNavbar = () => {
           <Container fluid>
             {/* ----- NAVBAR TITLE OUTSIDE ----- */}
             <Navbar.Brand as={Link} to={'/'}>
-              e-commerce
+              ecommerce
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
@@ -20,7 +20,7 @@ const MyNavbar = () => {
               <Offcanvas.Header closeButton>
                 {/* ----- NAVBAR TITLE INSIDE ----- */}
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  e-commerce
+                  ecommerce
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
