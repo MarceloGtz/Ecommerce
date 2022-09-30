@@ -1,12 +1,12 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import MyNavbar from './components/MyNavbar';
 import LoadingScreen from './components/LoadingScreen';
+import { Container } from 'react-bootstrap';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ProductDetail from './pages/ProductDetail';
 import Purchases from './pages/Purchases';
-import { useSelector } from 'react-redux';
 
 function App() {
   const isLoading = useSelector(state => state.isLoading);
