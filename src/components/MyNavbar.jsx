@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const MyNavbar = () => {
   return (
     <>
-      {['md'].map(expand => (
+      {['sm'].map(expand => (
         <Navbar key={expand} bg='light' expand={expand} className='mb-3'>
-          <Container fluid>
+          <Container>
             {/* ----- NAVBAR TITLE OUTSIDE ----- */}
             <Navbar.Brand as={Link} to={'/'}>
               E-commerce

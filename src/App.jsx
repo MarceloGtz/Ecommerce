@@ -15,7 +15,7 @@ function App() {
     <HashRouter>
       <MyNavbar />
       {isLoading && <LoadingScreen />}
-      <Container fluid>
+      <Container className='mt-3'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
