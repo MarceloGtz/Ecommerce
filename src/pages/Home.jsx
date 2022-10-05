@@ -1,10 +1,18 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Button, Card, Col, Form, InputGroup, Row } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  InputGroup,
+  ListGroup,
+  Row,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getProductsThunk, setProducts } from '../store/slices/products.slice';
+import { getProductsThunk } from '../store/slices/products.slice';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -47,37 +55,41 @@ const Home = () => {
   }, [products]);
 
   return (
-    <div>
-      <h1>Componente Home</h1>
-
+    <Row>
       {/* SEARCH */}
-      <InputGroup className='mb-3'>
-        <Form.Control
-          placeholder='Search product...'
-          aria-label="Recipient's username"
-          aria-describedby='basic-addon2'
-          onChange={e => setSearchValue(e.target.value)}
-          value={searchValue}
-        />
-        <Button onClick={searchProduct}>Search</Button>
-      </InputGroup>
-
+      <Col>
+        <InputGroup className='mb-3'>
+          <Form.Control
+            placeholder='Search product...'
+            aria-label="Recipient's username"
+            aria-describedby='basic-addon2'
+            onChange={e => setSearchValue(e.target.value)}
+            value={searchValue}
+          />
+          <Button onClick={searchProduct}>Search</Button>
+        </InputGroup>
+      </Col>
       {/* CATEGORIES */}
-      {categories.data?.categories.map(category => (
-        <Button
-          className='my-3'
-          key={category.id}
-          onClick={() => filterCategory(category.id)}
-        >
-          {category.name}
-        </Button>
-      ))}
-      <Row xs={1} sm={2} md={3} lg={4} xl={5} xxl={6} className='g-4'>
+      <Col sm={4}>
+        <ListGroup>
+          {categories.data?.categories.map(category => (
+            <ListGroup.Item
+              style={{ cursor: 'pointer' }}
+              key={category.id}
+              onClick={() => filterCategory(category.id)}
+            >
+              {category.name}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </Col>
+      {/* PRODUCTS */}
+      <Row xs={1} sm={2} md={3} lg={4} xl={5} xxl={6} className='g-3'>
         {filteredProducts.map(product => (
           <Col key={product.id}>
             <Card
               className='border'
-              style={{ cursor: 'pointer' }}
+              style={{ height: '100%', cursor: 'pointer' }}
               onClick={() => navigate(`/product/${product.id}`)}
             >
               <Card.Img
@@ -85,18 +97,25 @@ const Home = () => {
                 variant='top'
                 src={product.productImgs[0]}
                 alt={product.title}
-                style={{ width: '200px', height: '160px' }}
+                style={{ height: '150px' }}
               />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>Price: ${product.price}</Card.Text>
-                <Button variant='danger'>Add to cart</Button>
+                <Button
+                  className='d-block'
+                  type='button'
+                  size='sm'
+                  variant='primary'
+                >
+                  Add to cart
+                </Button>
               </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
-    </div>
+    </Row>
   );
 };
 

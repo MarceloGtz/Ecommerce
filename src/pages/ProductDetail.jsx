@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import { Button, Col, ListGroup, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
@@ -13,30 +13,39 @@ const ProductDetail = () => {
     product => product.category.id === productDetail.category.id
   );
 
+  console.log(relatedProducts);
+
   return (
-    <div>
-      <h1>Product Detail: {productDetail?.id}</h1>
-      <img
-        src={productDetail?.productImgs[0]}
-        alt={productDetail?.title}
-        style={{ width: '200px', height: '160px' }}
-      />
-      <h2>{productDetail?.title}</h2>
-      <p>{productDetail?.description}</p>
-      <p>Price: ${productDetail?.price}</p>
-      <Button variant='danger'>Add to cart</Button>
-      <br />
-      <hr />
-      <br />
-      <h2>Discover similar items</h2>
-      <ul>
-        {relatedProducts?.map(product => (
-          <li key={product.id}>
-            <Link to={`/product/${product.id}`}>{product.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Row>
+      <Col>
+        <img
+          src={productDetail?.productImgs[0]}
+          alt={productDetail?.title}
+          className='img-fluid'
+        />
+        <h2>{productDetail?.title}</h2>
+        <p>{productDetail?.description}</p>
+        <p>Price: ${productDetail?.price}</p>
+        <Button variant='primary'>Add to cart</Button>
+      </Col>
+      <Col lg={4}>
+        <h2>Discover similar items</h2>
+        <ListGroup>
+          {relatedProducts?.map(product => (
+            <ListGroup.Item key={product.id}>
+              <Link to={`/product/${product.id}`}>
+                <img
+                  className='img-fluid'
+                  src={product.productImgs[0]}
+                  alt={product.title}
+                />
+                <p>{product.title}</p>
+              </Link>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </Col>
+    </Row>
   );
 };
 

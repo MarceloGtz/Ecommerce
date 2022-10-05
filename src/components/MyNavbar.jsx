@@ -1,7 +1,20 @@
+import { useState } from 'react';
 import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Cart from './Cart';
 
 const MyNavbar = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.setItem('token', '');
+    navigate('/login');
+  };
+
   return (
     <>
       {['sm'].map(expand => (
@@ -36,13 +49,15 @@ const MyNavbar = () => {
                     Purchases
                   </Nav.Link>
                   {/* ----- CART MODAL ----- */}
-                  <Nav.Link onClick={() => alert('Modal Cart')}>Cart</Nav.Link>
+                  <Nav.Link onClick={handleShow}>Cart</Nav.Link>
+                  <Nav.Link onClick={logout}>Logout</Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
       ))}
+      <Cart show={show} handleClose={handleClose} />
     </>
   );
 };
