@@ -8,7 +8,6 @@ export const purchasesSlice = createSlice({
   initialState: [],
   reducers: {
     setPurchases: (state, action) => {
-      console.log('Purchases: ', action.payload);
       return action.payload;
     },
   },
